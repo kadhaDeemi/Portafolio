@@ -45,7 +45,7 @@ function App() {
                            transition-opacity duration-500 group-hover:opacity-100 z-[-1]"></span>
         </div>
 
-        {/* Educación: columna 1, filas 5–8 */}
+        {/* Educacipon: columna 1, filas 5–8 */}
         <div className="col-start-1 row-start-5 row-span-4 relative rounded-xl border border-gray-700 p-4 bg-[#101014] text-white
                         transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-2xl group">
           <h3 className="text-lg font-bold flex item-center gap-2"> 
