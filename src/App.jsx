@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-[#050505] p-4">
       {/*4 columnas x 8 filas*/}
-      <div className="grid grid-cols-4 grid-rows-8 gap-4 w-full max-w-7xl">
+      <div className="grid grid-cols-4 grid-rows-8 gap-4 w-4/6 max-w-7xl">
 
         {/* Bienvenidos → columnas 1–3, filas 1–4 */}
         <div className="col-start-1 col-span-3 row-start-1 row-span-4 relative rounded-xl border border-gray-700 p-6 bg-[#0b0b0f] text-white
@@ -32,13 +32,18 @@ function App() {
             Habilidades
           </h2>
           <ul className="grid grid-cols-1 gap-2 text-gray-300">
-            <li>✅ React.js</li>
+            <span class="text-sm sm:text-base font-medium text-black dark:text-white"> SQL</span>
+            <li class="text-sm sm:text-base font-medium text-black dark:text-white" >✅ React.js</li>
             <li>✅ Tailwind CSS</li>
             <li>✅ Django / APIs</li>
             <li>✅ PostgreSQL</li>
             <li>✅ Git / GitHub</li>
             <li>✅ Metodologías ágiles</li>
           </ul>
+          <div class="mt-6 p-3 rounded-lg bg-[#1a1a1a] border-l-4 border-blue-600"> 
+            <p class="text-sm text-gray-300 italic" data-cursor="text">DJAKSJA
+            </p>
+          </div>
           <span className="absolute -inset-[2px] rounded-xl opacity-0 pointer-events-none
                            bg-gradient-to-r from-[#1e3a8a] via-[#b91c1c] to-[#1e3a8a]
                            bg-[length:300%_300%] animate-neon-blue-red
