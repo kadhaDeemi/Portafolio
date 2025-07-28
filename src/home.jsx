@@ -14,7 +14,7 @@ export default function Principal(){
                   <img src="/saludo.gif" alt="emoji gif" className="w-10 h-10" />
                    Bienvenido/a</h2>
                 <p className="mt-3 text-gray-300">
-                  Soy <span className="font-bold">Damian Valderrama</span>, Titulado de la <span className="font-bold">carrera Ingeniería en Informática</span> en <span className="text-yellow-300">DuocUC</span> apasionado por el desarrollo Frontend. 
+                  Soy <span className="font-bold">Damian Valderrama</span>, Titulado de la <span className="font-bold">carrera Ingeniería en Informática</span> en <span className="text-yellow-300">Duoc UC</span> apasionado por el desarrollo Frontend. 
                   Con 4 años de estudio completados y mi práctica profesional realizada, me encuentro activamente buscando mi primera oportunidad laboral, 
                   cuento con experiencia en desarrollo <span className="font-bold">Frontend</span> y algo de <span className="font-bold">Backend</span>.
                 </p>
@@ -51,7 +51,9 @@ export default function Principal(){
             </div>
     
             {/* Educacipon: columna 1, filas 5–8 */}
-            <div className="col-start-1 row-start-5 row-span-4 relative rounded-xl border border-gray-700 p-4 bg-[#101014] text-white
+            <Link
+          to="/educacion" 
+          className="col-start-1 row-start-5 row-span-4 relative rounded-xl border border-gray-700 p-4 bg-[#101014] text-white
                             transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-2xl group">
               <h3 className="text-lg font-bold flex item-center gap-2"> 
               <img src="/buho.gif" alt="emoji gif" className="w-10 h-10" />
@@ -65,7 +67,7 @@ export default function Principal(){
                                bg-gradient-to-r from-[#1e3a8a] via-[#b91c1c] to-[#1e3a8a]
                                bg-[length:300%_300%] animate-neon-blue-red
                                transition-opacity duration-500 group-hover:opacity-100 z-[-1]"></span>
-            </div>
+            </Link>
     
             {/* Divs Cards q van al medio  */}
     

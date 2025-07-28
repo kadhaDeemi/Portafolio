@@ -70,20 +70,37 @@ button:focus-visible {
   }
 }
 
-@keyframes neon-blue-red {
-  0% {
-    background-position: 0% 50%;
-  }
+ @keyframes slideIn {
+   from {
+     opacity: 0;
+     transform: translateX(20px);
+   }
 
-  50% {
-    background-position: 100% 50%;
-  }
+   to {
+     opacity: 1;
+     transform: translateX(0);
+   }
+ }
 
-  100% {
-    background-position: 0% 50%;
-  }
-}
+ .animate-slideIn {
+   animation: slideIn 0.3s ease-out;
+ }
 
-.animate-neon-blue-red {
-  animation: neon-blue-red 4s ease infinite;
-}
+ @keyframes neon-blue-red {
+   0% {
+     background-position: 0% 50%;
+   }
+
+   50% {
+     background-position: 100% 50%;
+   }
+
+   100% {
+     background-position: 0% 50%;
+   }
+ }
+
+ .animate-neon-blue-red {
+   animation: neon-blue-red 4s ease infinite;
+ }
+ 
