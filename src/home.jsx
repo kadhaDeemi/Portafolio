@@ -116,7 +116,8 @@ export default function Principal(){
             </div>
     
             {/* Card 7: col 3, fila 6 */}
-            <div className="col-start-3 col-span-1 row-start-7 row-span-1 relative rounded-xl border border-gray-700 p-4 bg-[#141418] text-white
+            <Link to="/proyectos" 
+            className="col-start-3 col-span-1 row-start-7 row-span-1 relative rounded-xl border border-gray-700 p-4 bg-[#141418] text-white
                             transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-2xl group">
               <h4 className="font-bold flex item-center gap-2">
               <img src="/programar.gif" alt="emoji gif" className="w-10 h-10" />
@@ -125,7 +126,7 @@ export default function Principal(){
                                bg-gradient-to-r from-[#1e3a8a] via-[#b91c1c] to-[#1e3a8a]
                                bg-[length:300%_300%] animate-neon-blue-red
                                transition-opacity duration-500 group-hover:opacity-100 z-[-1]"></span>
-            </div>
+            </Link>
     
             {/* Card 8: col 2, fila 7 */}
             <div className="col-start-3 col-span-1 row-start-8 row-span-1 relative rounded-xl border border-gray-700 p-4 bg-[#141418] text-white
