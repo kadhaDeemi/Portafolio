@@ -73,8 +73,7 @@ const DynamicCarousel = () => {
                   <img
                     src={project.images[0]}
                     alt={project.title}
-                    className="w-full h-full object-cover pointer-events-none"
-                  />
+                    className="w-full h-full object-cover pointer-events-none"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
                     <h3 className="text-xl font-bold">{project.title}</h3>
                     <p className="text-orange-400 font-semibold">{project.category}</p>

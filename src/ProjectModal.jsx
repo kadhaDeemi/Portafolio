@@ -1,5 +1,3 @@
-// src/components/ProjectModal.jsx
-
 import React, { useState } from 'react';
 import { X, ChevronLeft, ChevronRight, Database, ExternalLink } from 'lucide-react';
 
@@ -93,14 +91,12 @@ const ProjectModal = ({ project, onClose }) => {
             </div>
             <button onClick={onClose}
               className="p-2 rounded-full text-gray-400 border-2 border-transparent transform transition-all duration-300 hover:text-red-500 hover:border-red-500/50 hover:scale-110"
-              title="Cerrar"
-            >
+              title="Cerrar">
               <X size={20} />
             </button>
           </div>
 
           <p className="text-gray-300 mb-6 flex-grow">{project.description}</p>
-
           <div className="mb-6">
             <h4 className="font-semibold mb-3">Tecnologías Usadas:</h4>
             <div className="flex flex-wrap gap-2">

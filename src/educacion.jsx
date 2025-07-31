@@ -1,8 +1,6 @@
 import { useState } from "react";
-
+import { motion } from 'framer-motion';
 export default function Educacion() {
-  // Nuevo estado para controlar qué contenido se muestra en el panel lateral
-  // Puede ser 'cursos', 'certificaciones', o null (para panel cerrado)
   const [selectedPanelContent, setSelectedPanelContent] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
 
@@ -51,7 +49,7 @@ export default function Educacion() {
     }));
   };
 
-  // colores para categoria
+  // colores para cate
   const categoriaColor = {
     "Desarrollo & Programación": "text-sky-400",
     "Bases de Datos": "text-green-400",
@@ -59,7 +57,7 @@ export default function Educacion() {
     "Gestión & Metodologías": "text-orange-400",
   };
 
-  // --- DATA PARA CERTIFICACIONES ---
+  // Certificaciones
   const certificaciones = [
     {
       titulo: "ANÁLISIS Y DESARROLLO DE MODELOS DE DATOS",
@@ -127,7 +125,12 @@ export default function Educacion() {
   ];
 
   return (
-    <div className="w-full relative">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: "easeIn" }}
+      className="w-full relative">
       <div className="max-w-5xl mx-auto mt-3 px-10">
         <ul className="relative"> {/*para los panelees*/}
           {[1, 2].map((semester) => (
@@ -135,9 +138,7 @@ export default function Educacion() {
               key={semester}
               data-aos="fade"
               id={`card${semester}`}
-              className="relative mb-10"
-            >
-              {/* Card principal */}
+              className="relative mb-10">
               <div
                 onClick={() => {
                   if (semester === 1) {
@@ -147,8 +148,7 @@ export default function Educacion() {
                   }
                 }}
                 className="cursor-pointer flex flex-col justify-between h-auto group overflow-hidden transition-colors duration-500 ease-in-out
-                bg-[#131313] p-6 border-[1.6px] border-[#2c2c2c] shadow-lg rounded-xl hover:border-orange-800 relative"
-              >
+                bg-[#131313] p-6 border-[1.6px] border-[#2c2c2c] shadow-lg rounded-xl hover:border-orange-800 relative">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="p-3 bg-[#1a1a1a] rounded-lg">
@@ -158,7 +158,6 @@ export default function Educacion() {
                       <h3 className="text-4xl font-bold text-white">
                         {semester === 1 ? "Ingeniería en Informática ↗" : "Telecomunicaciones"}
                       </h3>
-
                       {semester === 1 ? (
                         <>
                           <span className="text-yellow-500 font-semibold text-xl">
@@ -181,14 +180,12 @@ export default function Educacion() {
                         className="h-5 w-5"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
+                        stroke="currentColor">
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                       </svg>
                       <span>
                         {semester === 1
@@ -205,20 +202,17 @@ export default function Educacion() {
                         className="h-5 w-5"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
+                        stroke="currentColor">
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        />
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                       </svg>
                       <span className=" text-gray-300">Santiago, Maipú</span>
                     </div>
@@ -284,10 +278,9 @@ export default function Educacion() {
           </li>
         </ul>
 
-        {/* PANEL LATERAL CURSO/CERTIFICACIONES*/}
+        {/* PANEL LATERAL*/}
         {selectedPanelContent && (
-          <div className={`absolute top-0 left-full ml-6 w-90 rounded-xl shadow-xl p-[2px] overflow-hidden animate-slideIn transition-transform duration-500 ease-in-out`}>
-            {/* Fondo gradiente neon */}
+          <div className={`absolute top-0 left-full ml-6 w-90 rounded-xl shadow-xl p-[2px] overflow-hidden animate-slideIn transition-transform duration-700 ease-in-out`}>
             <div className="absolute -inset-[2px] rounded-xl opacity-100 pointer-events-none
                 bg-gradient-to-r from-[#1e3a8a] via-[#b91c1c] to-[#1e3a8a]
                 bg-[length:300%_300%] animate-neon-blue-red z-0"></div>
@@ -301,21 +294,17 @@ export default function Educacion() {
                 </h4>
                 <button
                   onClick={() => setSelectedPanelContent(null)}
-                  className="text-gray-400 hover:text-white"
-                >
+                  className="text-gray-400 hover:text-white">
                   ✕
                 </button>
               </div>
-
-              {/* Contenido condicional: Cursos o Certificaciones */}
               {selectedPanelContent === 'cursos' && (
                 <>
                   {/* filtro de cursos */}
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full p-2 rounded-md bg-[#222] text-gray-300 border border-[#333] mb-3"
-                  >
+                    className="w-full p-2 rounded-md bg-[#222] text-gray-300 border border-[#333] mb-3">
                     {categorias.map((cat) => (
                       <option key={cat} value={cat}>
                         {cat}
@@ -324,18 +313,14 @@ export default function Educacion() {
                   </select>
 
                   {/* Lista de Cursos */}
-                  <div className="space-y-3 max-h-[calc(100vh-200px)] overflow-y-auto pr-3"> {/* Ajustado max-h para mejor scroll */}
+                  <div className="space-y-3 max-h-[calc(100vh-200px)] overflow-y-auto pr-3">
                     {getCursosFiltrados().map(({ categoria, curso }, index) => (
-                      <div
-                        key={index}
-                        className={`relative p-3 rounded-xl bg-[#222] hover:bg-[#2c2c2c] transition group border border-transparent`}
-                      >
-                        {/* Borde neon al hover */}
+                      <div key={index} className={`relative p-3 rounded-xl bg-[#222] hover:bg-[#2c2c2c] transition group border border-transparent`}>
                         <span className="absolute -inset-[3px] rounded-2xl opacity-0 pointer-events-none
                             bg-gradient-to-r from-[#1e3a8a] via-[#b91c1c] to-[#1e3a8a]
                             bg-[length:300%_300%] animate-neon-blue-red
-                            transition-opacity duration-500 group-hover:opacity-100 z-[-1]"></span>
-
+                            transition-opacity duration-500 group-hover:opacity-100 z-[-1]">
+                            </span>
                         <p className="text-sm text-gray-200">{curso}</p>
                         <span className={`text-xs ${categoriaColor[categoria]}`}>
                           {categoria}
@@ -349,8 +334,7 @@ export default function Educacion() {
               {selectedPanelContent === 'certificaciones' && (
                 <div className="space-y-6 max-h-[calc(100vh-150px)] overflow-y-auto pr-3"> 
                   {certificaciones.map((cert, index) => (
-                    <div
-                      key={index}
+                    <div key={index}
                       className="group relative bg-[#131313] p-5 border-[1.6px] border-[#2c2c2c] shadow-lg rounded-xl
                                  transition-colors duration-500 flex flex-col justify-between">
                         <span className="absolute -inset-[5px] rounded-2xl opacity-0 pointer-events-none
@@ -367,11 +351,8 @@ export default function Educacion() {
                         )}
                       </div>
                       {cert.enlace && (
-                        <div className="mt-auto pt-2"> {/* Empuja el botón hacia abajo si el contenido varía */}
-                          <a
-                            href={cert.enlace}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <div className="mt-auto pt-2">
+                          <a href={cert.enlace} target="_blank" rel="noopener noreferrer"
                             className="inline-block px-4 py-2 bg-orange-500 text-white rounded-md text-sm font-semibold
                                        hover:bg-orange-700 transition-colors duration-300"> Ver Credencial
                           </a>
@@ -385,6 +366,6 @@ export default function Educacion() {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

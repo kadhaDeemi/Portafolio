@@ -1,9 +1,15 @@
+import { motion } from 'framer-motion';
 export default function Exp() {
   return (
     
-    <div className="flex flex-col justify-center items-start md:max-w-3xl mx-auto mb-16 px-4">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: "easeIn" }}
+      className="flex flex-col justify-center items-start md:max-w-3xl mx-auto mb-16 px-4">
       
-      {/* === EXPERIENCIA 1 === */}
+      {/*EXPERIENCIA 1*/}
       <div className="relative w-full">
         {/* Línea vertical del timeline */}
         <div className="absolute left-8 top-0 h-full w-1 bg-[#2c2c2c] origin-top"></div>
@@ -42,8 +48,7 @@ export default function Exp() {
                   (tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 text-xs font-medium bg-[#1a1a1a] text-orange-400 rounded-full"
-                    >
+                      className="px-3 py-1 text-xs font-medium bg-[#1a1a1a] text-orange-400 rounded-full">
                       {tech}
                     </span>
                   )
@@ -98,8 +103,7 @@ export default function Exp() {
                   (tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 text-xs font-medium bg-[#1a1a1a] text-orange-400 rounded-full"
-                    >
+                      className="px-3 py-1 text-xs font-medium bg-[#1a1a1a] text-orange-400 rounded-full">
                       {tech}
                     </span>
                   )
@@ -159,8 +163,7 @@ export default function Exp() {
                 ].map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 text-xs font-medium bg-[#1a1a1a] text-sky-500 rounded-full"
-                  >
+                    className="px-3 py-1 text-xs font-medium bg-[#1a1a1a] text-sky-500 rounded-full">
                     {skill}
                   </span>
                 ))}
@@ -174,6 +177,6 @@ export default function Exp() {
           </div>
         </section>
       </div>
-    </div>
+    </motion.div>
   );
 }
