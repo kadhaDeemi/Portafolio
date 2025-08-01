@@ -82,7 +82,6 @@ const ProjectModal = ({ project, onClose }) => {
             </>
           )}
         </div>
-
         <div className="p-8 flex flex-col flex-grow overflow-y-auto">
           <div className="flex justify-between items-start mb-4">
             <div>
@@ -95,7 +94,6 @@ const ProjectModal = ({ project, onClose }) => {
               <X size={20} />
             </button>
           </div>
-
           <p className="text-gray-300 mb-6 flex-grow">{project.description}</p>
           <div className="mb-6">
             <h4 className="font-semibold mb-3">Tecnologías Usadas:</h4>

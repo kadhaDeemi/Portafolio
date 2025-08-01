@@ -9,7 +9,7 @@ function App() {
   return (
     <Routes>
       <Route index element={<Principal />} /> {/* La página de inicio */}
-      <Route path="/" element={<Layout />}>
+      <Route classname="pb-24" path="/" element={<Layout />}>
         <Route path="experiencia" element={<Exp />} />
         <Route path="educacion" element={<Educacion />} />
         <Route path="proyectos" element={<GalleryPage />} />
