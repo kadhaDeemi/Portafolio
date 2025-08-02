@@ -10,7 +10,6 @@ const DynamicCarousel = () => {
   const [startX, setStartX] = useState(0);
   const [startRotation, setStartRotation] = useState(0);
   
-  // --- CAMBIO CLAVE: Radio y tamaño responsivos ---
   const [radius, setRadius] = useState(window.innerWidth < 768 ? 220 : 340);
   const [panelSize, setPanelSize] = useState({ 
     width: window.innerWidth < 768 ? 180 : 280, 
@@ -30,22 +29,29 @@ const DynamicCarousel = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleMouseDown = (e) => {
-    e.preventDefault(); 
+  const getClientX = (e) => {
+    // coordenadas
+    return e.touches ? e.touches[0].clientX : e.clientX;
+  };
+
+  const handleDragStart = (e) => {
     setIsDragging(true);
-    setStartX(e.clientX);
+    setStartX(getClientX(e));
     setStartRotation(rotationY);
     if (carouselRef.current) carouselRef.current.style.cursor = 'grabbing';
   };
 
-  const handleMouseUp = () => {
+  const handleDragEnd = () => {
     setIsDragging(false);
     if (carouselRef.current) carouselRef.current.style.cursor = 'grab';
   };
 
-  const handleMouseMove = (e) => {
+  const handleDragMove = (e) => {
     if (!isDragging) return;
-    const deltaX = e.clientX - startX;
+    //para q no haya scroll en celu
+    e.preventDefault();
+    const currentX = getClientX(e);
+    const deltaX = currentX - startX;
     setRotationY(startRotation + deltaX * 0.5);
   };
 
@@ -54,25 +60,34 @@ const DynamicCarousel = () => {
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center text-white p-4 md:p-8 select-none"
-      onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
+      // Eventos en el pc
+      onMouseMove={handleDragMove} 
+      onMouseUp={handleDragEnd} 
+      onMouseLeave={handleDragEnd}
+      // Eventos para el celu
+      onTouchMove={handleDragMove}
+      onTouchEnd={handleDragEnd}
+    >
       <div className="text-center z-10 mb-8 md:mb-16">
         <h2 className="text-2xl md:text-3xl font-bold uppercase text-shadow-glow">
           Mis Proyectos
         </h2>
         <p className="text-base md:text-lg text-gray-400 font-semibold mt-2 px-3">
-          Haz clic y arrastra para explorar
+          Haz clic o desliza para explorar
         </p>
       </div>
       
-      {/* Contenedor del carrusel con tamaño dinámico */}
-      <div style={{ 
+      <div 
+        style={{ 
           width: `${panelSize.width}px`, 
           height: `${panelSize.height}px`, 
           perspective: '1200px', 
           cursor: 'grab' 
         }}
         ref={carouselRef}
-        onMouseDown={handleMouseDown}>
+        onMouseDown={handleDragStart}
+        onTouchStart={handleDragStart}
+      >
         <div className="w-full h-full absolute" style={{ transformStyle: 'preserve-3d', transform: `rotateY(${rotationY}deg)` }}>
           {projects.map((project, index) => {
             const panelAngle = index * angle;
@@ -83,7 +98,13 @@ const DynamicCarousel = () => {
                   transform: `rotateY(${panelAngle}deg) translateZ(${radius}px)`,
                 }}>
                 <div className="w-full h-full bg-gray-800 rounded-2xl overflow-hidden shadow-2xl shadow-orange-400/30 group"
-                  onClick={() => { if (Math.abs(rotationY - startRotation) < 2) setModalData(project); }}>
+                  // Logica para el click
+                  onClick={() => { 
+                    if (Math.abs(rotationY - startRotation) < 5) {
+                      setModalData(project);
+                    }
+                  }}
+                >
                   <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover pointer-events-none"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-6 flex flex-col justify-end">
                     <h3 className="text-lg md:text-xl font-bold">{project.title}</h3>
