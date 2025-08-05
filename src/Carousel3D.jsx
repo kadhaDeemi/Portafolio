@@ -1,19 +1,20 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { projects } from './projects';
 import ProjectModal from './ProjectModal';
 
 const DynamicCarousel = () => {
   const carouselRef = useRef(null);
+  const containerRef = useRef(null); // Ref para el contenedor principal
   const [modalData, setModalData] = useState(null);
   const [rotationY, setRotationY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [startRotation, setStartRotation] = useState(0);
-  
+
   const [radius, setRadius] = useState(window.innerWidth < 768 ? 220 : 340);
-  const [panelSize, setPanelSize] = useState({ 
-    width: window.innerWidth < 768 ? 180 : 280, 
-    height: window.innerWidth < 768 ? 270 : 420 
+  const [panelSize, setPanelSize] = useState({
+    width: window.innerWidth < 768 ? 180 : 280,
+    height: window.innerWidth < 768 ? 270 : 420
   });
 
   useEffect(() => {
@@ -30,7 +31,6 @@ const DynamicCarousel = () => {
   }, []);
 
   const getClientX = (e) => {
-    // coordenadas
     return e.touches ? e.touches[0].clientX : e.clientX;
   };
 
@@ -46,26 +46,37 @@ const DynamicCarousel = () => {
     if (carouselRef.current) carouselRef.current.style.cursor = 'grab';
   };
 
-  const handleDragMove = (e) => {
+  //callback para mjorar rendimieento del proyecto 
+  const handleDragMove = useCallback((e) => {
     if (!isDragging) return;
-    //para q no haya scroll en celu
     e.preventDefault();
     const currentX = getClientX(e);
     const deltaX = currentX - startX;
     setRotationY(startRotation + deltaX * 0.5);
-  };
+  }, [isDragging, startX, startRotation]);
+
+  // Efecto para el touchmove para q no seea pasivo
+  useEffect(() => {
+    const node = containerRef.current;
+    if (node) {
+      node.addEventListener('touchmove', handleDragMove, { passive: false });
+      return () => {
+        node.removeEventListener('touchmove', handleDragMove, { passive: false });
+      };
+    }
+  }, [handleDragMove]);
 
   const panelCount = projects.length;
   const angle = 360 / panelCount;
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center text-white p-4 md:p-8 select-none"
-      // Eventos en el pc
-      onMouseMove={handleDragMove} 
-      onMouseUp={handleDragEnd} 
+    <div
+      ref={containerRef}
+      className="w-full h-full flex flex-col justify-center items-center text-white p-4 md:p-8 select-none"
+      onMouseMove={handleDragMove}
+      onMouseUp={handleDragEnd}
       onMouseLeave={handleDragEnd}
-      // Eventos para el celu
-      onTouchMove={handleDragMove}
+      // onTouchMove es manejado por el useEffect
       onTouchEnd={handleDragEnd}
     >
       <div className="text-center z-10 mb-8 md:mb-16">
@@ -77,12 +88,12 @@ const DynamicCarousel = () => {
         </p>
       </div>
       
-      <div 
-        style={{ 
-          width: `${panelSize.width}px`, 
-          height: `${panelSize.height}px`, 
-          perspective: '1200px', 
-          cursor: 'grab' 
+      <div
+        style={{
+          width: `${panelSize.width}px`,
+          height: `${panelSize.height}px`,
+          perspective: '1200px',
+          cursor: 'grab'
         }}
         ref={carouselRef}
         onMouseDown={handleDragStart}
@@ -98,8 +109,7 @@ const DynamicCarousel = () => {
                   transform: `rotateY(${panelAngle}deg) translateZ(${radius}px)`,
                 }}>
                 <div className="w-full h-full bg-gray-800 rounded-2xl overflow-hidden shadow-2xl shadow-orange-400/30 group"
-                  // Logica para el click
-                  onClick={() => { 
+                  onClick={() => {
                     if (Math.abs(rotationY - startRotation) < 5) {
                       setModalData(project);
                     }

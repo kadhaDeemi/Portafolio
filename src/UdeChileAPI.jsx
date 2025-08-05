@@ -1,99 +1,64 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// Cambie los datos a datos planos pq teenia problemas con cors y tampoco m funciono el proxy backend:(
+const DATOS_URL = "https://cdn.jsdelivr.net/gh/kadhaDeemi/datos-porfatolio/partidos_udechile.json";
 
 export default function ApiUdeChile() {
   const [racha, setRacha] = useState([]);
   const [proximo, setProximo] = useState(null);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Últimos 5 partidos
-    fetch("https://api.sofascore.com/api/v1/team/3161/events/last/0")
-      .then((res) => res.json())
-      .then((data) => {
-        const partidosOrdenados = data.events.sort(
-          (a, b) => b.startTimestamp - a.startTimestamp
-        );
-
-        const ultimos5Partidos = partidosOrdenados.slice(0, 5).map((partido) => {
-          const esLocal = partido.homeTeam.id === 3161;
-          const golesLocal = partido.homeScore.current ?? 0;
-          const golesVisita = partido.awayScore.current ?? 0;
-
-          let resultado;
-          if (golesLocal === golesVisita) {
-            resultado = "E";
-          } else {
-            const gano =
-              (esLocal && golesLocal > golesVisita) ||
-              (!esLocal && golesVisita > golesLocal);
-            resultado = gano ? "V" : "D";
-          }
-
-          return {
-            tipo: resultado,
-            marcador: `${golesLocal} - ${golesVisita}`,
-          };
-        });
-
-        setRacha(ultimos5Partidos.reverse());
-      });
-
-    // Próximo partido
-    fetch("https://api.sofascore.com/api/v1/team/3161/events/next/0")
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.events || data.events.length === 0) {
-          setProximo(null);
-          return;
-        }
-        const partido = data.events[0];
-        setProximo({
-          local: partido.homeTeam.name,
-          visita: partido.awayTeam.name,
-          localId: partido.homeTeam.id,
-          visitaId: partido.awayTeam.id,
-          fecha: partido.startTimestamp * 1000,
-        });
+    fetch(DATOS_URL)
+      .then(res => {
+        if (!res.ok) throw new Error('No se pudo cargar el archivo de datos');
+        return res.json();
+      })
+      .then(data => {
+        setProximo(data.proximo_partido);
+        setRacha(data.ultimos_resultados);
+      })
+      .catch(err => {
+        console.error("Error al cargar datos:", err);
+        setError("No se pudieron cargar los datos.");
+      })
+      .finally(() => {
+        setCargando(false);
       });
   }, []);
 
-  const formatoFecha = (fechaISO) => {
-    const fecha = new Date(fechaISO);
-    return fecha.toLocaleDateString("es-CL", {
-      weekday: "long",
-      hour: "2-digit",
-      minute: "2-digit",
-      day: "2-digit",
-      month: "long",
-    });
-  };
-
   const colorResultado = (tipo) => {
-    if (tipo === "V") return "text-green-500";
-    if (tipo === "E") return "text-yellow-400";
-    if (tipo === "D") return "text-red-500";
+    if (tipo === "W") return "text-green-500";
+    if (tipo === "D") return "text-yellow-400";
+    if (tipo === "L") return "text-red-500";
     return "text-white";
   };
 
-  //OBTENER LOGOS DE LOS EQUIPOS
-  const getLogoUrl = (teamId) =>
-    `https://api.sofascore.app/api/v1/team/${teamId}/image`;
+  if (cargando) {
+    return <div className="text-center text-gray-400">Cargando...</div>;
+  }
+  
+  if (error) {
+    return <div className="text-center text-red-500">{error}</div>;
+  }
 
   return (
     <div className="relative w-full text-white flex flex-col items-center justify-center rounded-lg">
       {/* Últimos 5 partidos */}
       <div className="text-xs text-gray-300 w-full flex flex-col items-start">
         <div className="flex gap-2">
-          {racha.length > 0 ? (
+          {racha && racha.length > 0 ? (
             racha.map((r, i) => (
               <div key={i} className="flex flex-col items-center">
                 <span className={`font-bold text-xs ${colorResultado(r.tipo)}`}>
                   {r.tipo}
                 </span>
-                <span className="text-[10px]">{r.marcador}</span>
+                <span className="text-[10px] text-gray-200 font-semibold">{r.marcador}</span>
               </div>
             ))
           ) : (
-            <span>Cargando...</span>
+            <span>No hay resultados recientes.</span>
           )}
         </div>
       </div>
@@ -102,23 +67,29 @@ export default function ApiUdeChile() {
       <div className="text-center">
         {proximo ? (
           <>
-            <h2 className="text-lg font-bold mb-2">Próximo partido</h2>
+            <h2 className="text-sm font-bold mb-2">PRÓXIMO PARTIDO</h2>
             <div className="flex items-center justify-center gap-3">
-              {/* Logo local */}
-              <img
-                src={getLogoUrl(proximo.localId)}
-                alt={proximo.local}
-                className="w-10 h-10"
-              />
-              <span className="text-lg font-bold">vs</span>
-              {/* Logo visitante */}
-              <img
-                src={getLogoUrl(proximo.visitaId)}
-                alt={proximo.visita}
-                className="w-10 h-10"
-              />
+              <div className="flex flex-col items-center gap-1 w-20 text-center">
+                <img
+                  src={proximo.logoLocal}
+                  alt={proximo.equipoLocal}
+                  className="w-10 h-10"
+                />
+                <span className="text-xs font-semibold truncate">{proximo.equipoLocal}</span>
+              </div>
+              
+              <span className="text-lg font-bold text-gray-300">vs</span>
+
+              <div className="flex flex-col items-center gap-1 w-20 text-center">
+                <img
+                  src={proximo.logoVisita}
+                  alt={proximo.equipoVisita}
+                  className="w-10 h-10"
+                />
+                <span className="text-xs font-semibold truncate">{proximo.equipoVisita}</span>
+              </div>
             </div>
-            <p className="text-gray-400 mt-2">{formatoFecha(proximo.fecha)}</p>
+            <p className="text-gray-300 text-xs font-semibold">{proximo.fecha_str}</p>
           </>
         ) : (
           <p>Cargando próximo partido...</p>
