@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 // Cambie los datos a datos planos pq teenia problemas con cors y tampoco m funciono el proxy backend:(
-const DATOS_URL = "https://cdn.jsdelivr.net/gh/kadhaDeemi/datos-porfatolio/partidos_udechile.json";
+const DATOS_URL = "https://cdn.jsdelivr.net/gh/kadhaDeemi/datos-portafolio/partidos_udechile.json?v=";
+  
+
 
 export default function ApiUdeChile() {
   const [racha, setRacha] = useState([]);

@@ -5,7 +5,7 @@ export default function Educacion() {
   const [selectedPanelContent, setSelectedPanelContent] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
 
-  // Datos de cursos y certificaciones (sin cambios)
+  // Datos de cursos y certificaciones
   const cursos = {
     "Desarrollo & Programación": [
       "Programación de Algoritmos", "Programación Web", "Ingeniería de Software",
