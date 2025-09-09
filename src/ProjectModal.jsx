@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronLeft, ChevronRight, Database, ExternalLink } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Database, ExternalLink, Image } from 'lucide-react';
 
 const ProjectModal = ({ project, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,6 +20,18 @@ const ProjectModal = ({ project, onClose }) => {
     'React': {
       logo: 'https://cdn.simpleicons.org/react/61DAFB',
       style: 'bg-[#61DAFB]/10 text-[#61DAFB] border-[#61DAFB]/30'
+    },
+    'TailwindCSS': {
+    logo: 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
+    style: 'bg-[#06B6D4]/10 text-[#06B6D4] border-[#06B6D4]/30'
+    },
+    'Swiper': {
+    logo: 'https://cdn.simpleicons.org/swiper/6332F6',
+    style: 'bg-[#6332F6]/10 text-[#6332F6] border-[#6332F6]/30'
+    },
+    'Lightbox JS': {
+    icon: <Image size={16} className="text-gray-400" />,
+    style: 'bg-gray-500/10 text-gray-400 border-gray-500/30'
     },
     'Python': {
       logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
@@ -45,6 +57,7 @@ const ProjectModal = ({ project, onClose }) => {
       icon: <Database size={16} className="text-red-500" />,
       style: 'bg-red-500/10 text-red-500 border-red-500/30'
     },
+    
     'JavaScript (JSX)': 'React',
   };
 
@@ -118,7 +131,7 @@ const ProjectModal = ({ project, onClose }) => {
           <div className="flex items-center gap-4 mt-auto pt-6">
             {project.liveUrl && project.liveUrl !== '#' ? (
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-                className="p-3 rounded-full bg-gray-700 text-white border border-gray-600 shadow-lg transform transition-all duration-300 hover:bg-indigo-500 hover:shadow-indigo-500/40 hover:scale-110"
+                className="p-3 rounded-full bg-gray-700 text-white border border-gray-600 shadow-lg transform transition-all duration-200 hover:bg-indigo-500 hover:shadow-indigo-500/40 hover:scale-110"
                 title="Ver Demo">
                 <ExternalLink size={20} />
               </a>
@@ -129,7 +142,7 @@ const ProjectModal = ({ project, onClose }) => {
             )}
             {project.repoUrl && project.repoUrl !== '#' ? (
               <a href={project.repoUrl} target="_blank" rel="noopener noreferrer"
-                className="p-3 rounded-full bg-gray-700 text-white border border-gray-600 shadow-lg transform transition-all duration-300 hover:bg-orange-500/60 hover:shadow-orange-500/20 hover:scale-110"
+                className="p-3 rounded-full bg-gray-700 text-white border border-gray-600 shadow-lg transform transition-all duration-200 hover:bg-orange-500/60 hover:shadow-orange-500/20 hover:scale-110"
                 title="Ver Código en GitHub">
                 <img src="https://cdn.simpleicons.org/github/white" alt="GitHub" className="w-5 h-5" />
               </a>

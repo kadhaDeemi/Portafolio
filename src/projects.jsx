@@ -1,4 +1,21 @@
+
 export const projects = [
+  {
+    title: 'SDC Producciones Pagina web',
+    category: 'Desarrollo Web',
+    images: [
+      'SDCProducciones/HomeSDC.webp',
+      'SDCProducciones/ProyectosSDC.webp',
+      'SDCProducciones/ServiciosSDC.webp',
+      'SDCProducciones/ServiciosPantallaSDC.webp',
+      'SDCProducciones/NosotrosSDC.webp',
+      'SDCProducciones/ContactoSDC.webp'
+    ],
+    description: 'Es una pagin web dedicada a una empresa de producciones de eventos, arriendos de pantalla, iluminación y estructuras.',
+    tags: ['JavaScript (JSX)', 'React', 'TailwindCSS', 'Swiper', 'Lightbox JS'],
+    liveUrl: 'https://web-producciones.vercel.app',
+    repoUrl: 'https://github.com/kadhaDeemi/Web-empresa-producciones',
+  },
   {
     title: 'E-commerce GioPiza',
     category: 'Desarrollo Web',
