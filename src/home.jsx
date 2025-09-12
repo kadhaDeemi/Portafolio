@@ -75,7 +75,7 @@ export default function Principal() {
                 {/* educacion */}
                 <Link
                     to="/educacion"
-                    className="lg:col-start-1 lg:row-start-5 lg:row-span-4 relative rounded-xl border border-gray-700 p-4 bg-[#101014] text-white
+                    className="lg:col-start-1 lg:row-start-5 lg:row-span-3 relative rounded-xl border border-gray-700 p-4 bg-[#101014] text-white
                                 transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-2xl group">
                     <h3 className="text-lg font-bold flex items-center gap-2">
                         <img src="/buho.gif" alt="emoji gif" className="w-10 h-10" />
@@ -131,28 +131,6 @@ export default function Principal() {
                                      bg-[length:300%_300%] animate-neon-blue-red
                                      transition-opacity duration-500 group-hover:opacity-100 z-[-1]"></span>
                 </Link>
-                
-                {/* proximamente*/}
-                <div className="lg:col-start-2 lg:col-span-1 lg:row-start-8 lg:row-span-1 relative rounded-xl border border-gray-700 p-4 bg-[#141418] text-white
-                                transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-2xl group">
-                    <h4 className="font-bold">Próximamente...</h4>
-                    <p className="text-sm text-gray-300"></p>
-                    <span className="absolute -inset-[2px] rounded-xl opacity-0 pointer-events-none
-                                     bg-gradient-to-r from-[#1e3a8a] via-[#b91c1c] to-[#1e3a8a]
-                                     bg-[length:300%_300%] animate-neon-blue-red
-                                     transition-opacity duration-500 group-hover:opacity-100 z-[-1]"></span>
-                </div>
-                
-                {/* proximamente*/}
-                <div className="lg:col-start-3 lg:col-span-1 lg:row-start-8 lg:row-span-1 relative rounded-xl border border-gray-700 p-4 bg-[#141418] text-white
-                                transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-2xl group">
-                    <h4 className="font-bold">Próximamente....</h4>
-                    <p className="text-sm text-gray-300"></p>
-                    <span className="absolute -inset-[2px] rounded-xl opacity-0 pointer-events-none
-                                     bg-gradient-to-r from-[#1e3a8a] via-[#b91c1c] to-[#1e3a8a]
-                                     bg-[length:300%_300%] animate-neon-blue-red
-                                     transition-opacity duration-500 group-hover:opacity-100 z-[-1]"></span>
-                </div>
             </div>
         </motion.div>
     );
