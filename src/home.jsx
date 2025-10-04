@@ -19,7 +19,7 @@ export default function Principal() {
                         <img src="/saludo.gif" alt="emoji gif" className="w-10 h-10" />
                         Bienvenido/a</h2>
                     <p className="mt-3 text-gray-300">
-                        Soy <span className="font-bold">Damian Valderrama Acuña</span>, <span className="font-bold">Ingeniero en Informática</span> titulado de <span className="text-yellow-300">Duoc UC</span>.
+                        Soy <span className="font-bold">Damián Valderrama Acuña</span>, <span className="font-bold">Ingeniero en Informática</span> titulado de <span className="text-yellow-300">Duoc UC</span>.
                         Cuento con sólida formación y experiencia práctica en desarrollo web, utilizando Python, Django, JavaScript (JSX) y React, además de bases de datos relacionales y no relacionales.
                         Estoy buscando activamente mi primera oportunidad profesional en desarrollo de software/web, donde pueda aportar mis conocimientos, compromiso y visión emprendedora.
                     </p>
